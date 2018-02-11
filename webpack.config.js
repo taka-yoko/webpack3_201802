@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = [
   {
@@ -57,27 +58,30 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\.scss/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                // オプションでCSS内のurl()メソッドの取り込みを禁止する
-                url: false,
-                sourceMap: true,
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: { sourceMap: true }
               },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
+              {
+                loader: 'postcss-loader',
+                options: { sourceMap: true }
               },
-            },
-            'sass-loader',
-          ]
+              {
+                loader: 'sass-loader',
+                options: { sourceMap: true }
+              },
+            ]
+          }),
         }
       ]
-    }
+    },
+    plugins: [
+      new ExtractTextPlugin('bundle.css'),
+    ]
   }
 ];
