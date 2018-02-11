@@ -1,3 +1,4 @@
 export function hello() {
-  alert("hello, world");
+  const greeting = "こんにちは世界！！！";
+  alert(greeting);
 }
