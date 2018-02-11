@@ -7,12 +7,18 @@ This configration includes actions below.
 - Launch local server, and reload browser when a file is modified.
 
 # version infomation
-yarn: 1.1.0
-webpack: 3.10.0
+- yarn: 1.1.0
+- webpack: 3.10.0
 
 # How to build
 To make build files, execute command below.
+
+```
 $ yarn run build
+```
 
 To launch local server
+
+```
 $ yarn start
+```
